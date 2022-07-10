@@ -1,10 +1,14 @@
 from rest_framework import serializers
+
+from posts.serializer import PostSerializer
 from .models import Profiles
 import re
 from rest_framework.exceptions import ValidationError
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    posts = PostSerializer(many=True, read_only=True)
+
     class Meta:
         model = Profiles
         fields = '__all__'
