@@ -1,0 +1,97 @@
+pip install djangorestframework
+pip install markdown       # Markdown support for the browsable API.
+pip install django-filter  # Filtering supp
+-------------------------------------------------------
+pip freeze > requirements.txt
+---------------------------------------------------------
+python -m venv venv
+cd venv
+cd scripts
+activate
+pip install -r requirements.txt
+----------------------------------------
+Django Server Config
+PYTHONUNBUFFERED=1;DJANGO_SETTINGS_MODULE=djangoProject.settings
+------------------------------------------
+Ctrl+Alt+R
+python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 --output dump.json
+python manage.py migrate
+python manage.py loaddata dump.json
+
+
+---------------------------------------------------------
+ctrl+alt+L
+ctrl+ shift + -
+-------------------------------------------------------
+startapp communication
+
+
+-------------------------------
+export and import Docker
+-----------------------------------------
+docker save rabbitmq -o D:\rabbitmq.tar
+docker load -i  D:\rabbitmq.tar
+-----------------------------------------
+
+docker-compose up
+
+docker-compose build
+
+docker-compose exec backend sh
+----------------------------------------------
+Need Deploy Django on wamp config
+
+1-install wamp
+2-install python on C:\python39
+3-delete venv project
+4-set interpreter  to c:\python39\python.exe
+5-install requirement to global venv os
+6-set "MOD_WSGI_APACHE_ROOTDIR=C:\wamp64\bin\apache\apache2.4.46"
+7- pip install mod_wsgi
+8- mod_wsgi-express module-config
+9- copy config to httpd-config wamp
+10-
+
+
+LoadFile "c:/python39/python39.dll"
+LoadModule wsgi_module "c:/python39/lib/site-packages/mod_wsgi/server/mod_wsgi.cp39-win_amd64.pyd"
+WSGIPythonHome "c:/python39"
+
+
+WSGIScriptAlias / "C:/dev/crmBackend/crmBackend/wsgi.py"
+
+WSGIPythonPath "C:/dev/crmBackend"
+
+Alias /static/ C:/dev/crmBackend/static/
+
+
+<Directory "C:/dev/crmBackend/static/">
+	Require all granted
+</Directory>
+
+<Directory "C:/dev/crmBackend">
+	Require all granted
+</Directory>
+
+<Directory "C:/dev/crmBackend/crmBackend" >
+	<Files wsgi.py>
+		Require all granted
+	</Files>
+	Require all granted
+</Directory>
+
+
+------------------------------------------------------------------------------------------------
+
+how to deploy Django without wamp
+create run.bat in root directory project
+   @echo off
+   cmd /k "cd /d venv\scripts & activate & cd /d ../.. & python manage.py runserver 0.0.0.0:8000"
+be careful if you want service in network
+ipconfig
+  ip:192.168.1.100
+  @echo off
+  cmd /k "cd /d venv\scripts & activate & cd /d ../.. & python manage.py runserver 192.168.1.100:8000"
+ and go settings.py
+ and add your ip in
+    ALLOWED_HOSTS = ['127.0.0.1','192.168.1.100']
