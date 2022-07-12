@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rest_framework import generics
+from misc.custom_generic_views import PartialUpdateAPIView
 
 
 #
@@ -62,9 +63,9 @@ from rest_framework import generics
 #     serializer_class = ProfileSerializer
 #     queryset = Profiles.objects.all()
 
-class ProfileView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profiles.objects.all()
+# class ProfileView(generics.RetrieveUpdateDestroyAPIView):
+#     serializer_class = ProfileSerializer
+#     queryset = Profiles.objects.all()
 
 # delete url : http://127.0.0.1:8000/profiles/6
 
@@ -87,3 +88,8 @@ class ProfileView(generics.RetrieveUpdateDestroyAPIView):
 #        "first_name": "test3",
 #        "last_name": "testfamily3"
 #    }
+
+
+class ProfileRetrieve(PartialUpdateAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profiles.objects.all()
