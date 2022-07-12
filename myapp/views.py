@@ -44,11 +44,46 @@ from rest_framework import generics
 #     queryset = Profiles.objects.all()
 
 
-class ProfileView(generics.CreateAPIView):
+# class ProfileView(generics.CreateAPIView):
+#     serializer_class = ProfileSerializer
+#     queryset = Profiles.objects.all()
+#
+#
+# class ProfileView(generics.ListCreateAPIView):
+#     serializer_class = ProfileSerializer
+#     queryset = Profiles.objects.all()
+
+
+# برای لیست کردن و اضافه کردن می توانیم استفاده کنیم حالت ترکیبی get all و create هستش شاید سوال کنید
+# چرا بقیه حالت را نمی توانیم بنویسم برای get one و put  و  partial update یا delete
+# باید از  retrieveApi باید استفاده کنیم
+
+# class ProfileView(generics.RetrieveAPIView):
+#     serializer_class = ProfileSerializer
+#     queryset = Profiles.objects.all()
+
+class ProfileView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProfileSerializer
     queryset = Profiles.objects.all()
 
+# delete url : http://127.0.0.1:8000/profiles/6
 
-class ProfileView(generics.ListCreateAPIView):
-    serializer_class = ProfileSerializer
-    queryset = Profiles.objects.all()
+# PATCH http://127.0.0.1:8000/profiles/1
+# body --> raw ---> Json(application/json)
+# {
+# 	    "phone_number": "09148702770"
+# }
+
+
+# PUT http://127.0.0.1:8000/profiles/1
+#  {
+#        "post":
+#            {
+#                "title": "new title3",
+#                "content": "sample content3"
+#            }
+#        ,
+#    	"phone_number": "09149431772",
+#        "first_name": "test3",
+#        "last_name": "testfamily3"
+#    }

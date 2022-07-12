@@ -20,5 +20,9 @@ from myapp import views
 
 urlpatterns = [
     # path('', views.profile_list, name='profile_list')
-    path('', views.ProfileView.as_view(), name='profile_list')
+    # path('', views.ProfileView.as_view(), name='profile_list')
+    path('<int:pk>', views.ProfileView.as_view(), name='profile_list')
 ]
+
+# url for check RetrieveAPIView
+#  http: // 127.0.0.1:8000/profiles/1
