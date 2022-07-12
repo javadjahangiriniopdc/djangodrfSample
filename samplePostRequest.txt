@@ -1,0 +1,11 @@
+  {
+        "post":
+            {
+                "title": "new title2",
+                "content": "sample content2"
+            }
+        ,
+        "phone_number": "09149431772",
+        "first_name": "test",
+        "last_name": "testfamily"
+    }
