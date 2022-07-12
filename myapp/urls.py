@@ -20,7 +20,8 @@ from myapp import views
 
 urlpatterns = [
     # path('', views.profile_list, name='profile_list')
-    # path('', views.ProfileView.as_view(), name='profile_list')
+    path('', views.ProfileView.as_view(), name='profile_list'),
+    # path('<int:pk>', views.ProfileView.as_view(), name='profile_list')
     path('<int:pk>', views.ProfileRetrieve.as_view(), name='profile_list')
 ]
 

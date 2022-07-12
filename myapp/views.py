@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+
 from myapp.models import Profiles
 from myapp.serializer import ProfileSerializer
 from django.http import JsonResponse
@@ -12,6 +14,7 @@ from rest_framework.response import Response
 
 from rest_framework import generics
 from misc.custom_generic_views import PartialUpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 
 
 #
@@ -93,3 +96,25 @@ from misc.custom_generic_views import PartialUpdateAPIView
 class ProfileRetrieve(PartialUpdateAPIView):
     serializer_class = ProfileSerializer
     queryset = Profiles.objects.all()
+
+
+class ProfileView(generics.ListAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profiles.objects.all()
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (BasicAuthentication, SessionAuthentication)
+
+
+# after add
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#     ]
+# }
+# to Settings no need authentication_classes
+
+class ProfileView(generics.ListAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profiles.objects.all()
+    permission_classes = (IsAuthenticated,)
