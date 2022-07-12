@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from rest_framework import generics
+
 
 #
 # @csrf_exempt
@@ -28,11 +30,15 @@ from rest_framework.response import Response
 #             return JsonResponse(serializer.data, status=201)
 #         return JsonResponse(serializer.errors, status=400)
 
-class ProfileView(APIView):
-    def get(self, request):
-        my_profiles = Profiles.objects.all()
-        my_serializers = ProfileSerializer(my_profiles, many=True)
-        return Response(my_serializers.data)
+# class ProfileView(APIView):
+#     def get(self, request):
+#         my_profiles = Profiles.objects.all()
+#         my_serializers = ProfileSerializer(my_profiles, many=True)
+#         return Response(my_serializers.data)
+#
+#     def posts(self):
+#         pass
 
-    def posts(self):
-        pass
+class ProfileView(generics.ListAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profiles.objects.all()
