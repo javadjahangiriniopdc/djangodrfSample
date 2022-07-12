@@ -47,3 +47,8 @@ from rest_framework import generics
 class ProfileView(generics.CreateAPIView):
     serializer_class = ProfileSerializer
     queryset = Profiles.objects.all()
+
+
+class ProfileView(generics.ListCreateAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profiles.objects.all()
