@@ -7,6 +7,9 @@ import re
 from rest_framework.exceptions import ValidationError
 
 
+
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     # posts = PostSerializer(many=True, read_only=True)
     posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
@@ -28,3 +31,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         profile = Profiles.objects.create(**validated_data)
         my_post = Posts.objects.create(**posts, author=profile)
         return profile
+
+# توجه شود فیلدهای که فقط خواندنی هستند در خروجی نمایش داده می شوند
+# توجه کنید اسم posts باید با related_name یکی باشد توجه شود فیلد
+# فقط نوشتی در خروجی نمایش داده نمی شود و فقط در ورودی دریافت می شود
+# وفیلدهای معمولی هم درورودی و هم در خروجی نمایش داده می شود
+
+
