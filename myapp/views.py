@@ -39,6 +39,11 @@ from rest_framework import generics
 #     def posts(self):
 #         pass
 
-class ProfileView(generics.ListAPIView):
+# class ProfileView(generics.ListAPIView):
+#     serializer_class = ProfileSerializer
+#     queryset = Profiles.objects.all()
+
+
+class ProfileView(generics.CreateAPIView):
     serializer_class = ProfileSerializer
     queryset = Profiles.objects.all()
